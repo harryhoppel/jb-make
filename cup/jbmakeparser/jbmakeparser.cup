@@ -1,0 +1,77 @@
+import com.jetbrains.jbmake.parser.ast.*;
+import java.util.List;
+import java.util.LinkedList;
+
+//------ Terminals
+
+terminal COLON;
+terminal LINE_TERMINATOR;
+terminal RECIPE_PREFIX;
+terminal WHITESPACE;
+terminal SPACE;
+terminal String OTHER;
+
+//------ Non terminals
+
+non terminal Makefile               makefile;
+non terminal List<Rule>             rule_list;
+non terminal Rule                   rule;
+
+non terminal Target                 target;
+
+non terminal TargetId               target_id;
+
+non terminal List<Dependency>       dependency_list;
+non terminal Dependency             dependencyName;
+
+non terminal Command                command;
+//------ Rules
+
+makefile                ::= rule_list:ll
+                            {: RESULT = new Makefile(ll); :}
+                        ;
+
+rule_list               ::= rule:r
+                            {: RESULT = new LinkedList<Rule>(); RESULT.add(0, r); :}
+                        | rule:r rule_list:rl
+                            {: rl.add(0, r); RESULT = rl; :}
+                        | LINE_TERMINATOR
+                        ;
+
+//
+// todo !!! error recovery !!!
+//
+// todo variable declarations
+// todo implicit rule support
+// todo line continuation support
+// todo full comment support
+
+rule                    ::= target:t LINE_TERMINATOR
+                            {: RESULT = new Rule(t); :}
+                        | target:t LINE_TERMINATOR command:c
+                            {: RESULT = new Rule(t, c); :}
+                        ;
+
+target                  ::= target_id:ti COLON
+                            {: RESULT = new Target(ti); :}
+                        | target_id:ti COLON SPACE dependency_list:dl
+                            {: RESULT = new Target(ti, dl); :}
+                        ;
+
+target_id               ::= OTHER:target_id_value
+                            {: RESULT = new TargetId(target_id_value); :}
+                        ;
+
+dependency_list         ::= dependencyName:d SPACE dependency_list:dl
+                            {: dl.add(0, d); RESULT = dl; :}
+                        | dependencyName:d
+                            {: RESULT = new LinkedList<Dependency>(); RESULT.add(0, d); :}
+                        ;
+
+dependencyName              ::= OTHER:dependency_value
+                            {: RESULT = new Dependency(dependency_value); :}
+                        ;
+
+command                 ::= RECIPE_PREFIX OTHER:command_value LINE_TERMINATOR
+                            {: RESULT = new Command(command_value); :}
+                        ;

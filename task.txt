@@ -1,0 +1,86 @@
+По имеющемуся описанию языка GNU make (короткая версия на Wikipedia) нужно построить дерево синтаксического разбора (Abstract Syntax Tree - AST) makefile-файлов.
+Например, для следующего makefile:
+all: hello
+hello: main.o
+    g++ main.o -o hello
+main.o: main.cpp
+    g++ -c main.cpp
+clean:
+    rm *o hello
+
+Примерное содержание AST-дерева:
+File
+  rule
+    target
+      id{all}
+      punctuation{:}
+      dep_list
+        id{hello}
+    command{}
+  rule
+    target
+      id{hello}
+      punctuation{:}
+      dep_list
+        id{main.o}
+    command{g++ main.o}
+  rule
+    target
+      id{main.o}
+      punctuation{:}
+      dep_list
+        id{main.cpp}
+    command{g++ -c main.cpp}
+  rule
+    target
+      id{clean}
+    command{rm *o hello}
+
+На построенном АST-дереве провести анализ по поиску корневых вершин в графе зависимостей. На предложенном примере - это цели (targets) all, clean
+
+На построенном АST-дереве провести корректное переименование листового файла и сопутствующих зависимостей.
+Например, переименование main.cpp в general.cxx должно трансформировать дерево к виду:
+File
+  rule
+    target
+      id{all}
+      punctuation{:}
+      dep_list
+        id{hello}
+    command{}
+  rule
+    target
+      id{hello}
+      punctuation{:}
+      dep_list
+        id{general.o}
+    command{g++ general.o}
+  rule
+    target
+      id{general.o}
+      punctuation{:}
+      dep_list
+        id{general.cxx}
+    command{g++ -c general.cxx}
+  rule
+    target
+      id{clean}
+    command{rm *o hello}
+
+Уметь синтезировать по AST-модели пригодный к исполнению makefile. После переименования должно получиться:
+all: hello
+hello: general.o
+    g++ general.o -o hello
+general.o: general.cxx
+    g++ -c general.cxx
+clean:
+    rm *o hello
+
+Задание должно работать на предоставленном примере, но не должно им ограничиваться.
+
+Взаимодействие с пользователем полностью на Ваше усмотрение.
+
+Требования к реализации и оформлению:
+Программа должна быть написана на Java и запускаться на любой платформе.
+Исходный код должен быть предоставлен в виде полностью настроенного самодостаточного проекта (желательно IntelliJ IDEA), размещенного на github.
+Должен быть предоставлен необходимый набор тестов.
