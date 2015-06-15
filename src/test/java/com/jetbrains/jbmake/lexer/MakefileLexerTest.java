@@ -1,17 +1,20 @@
 package com.jetbrains.jbmake.lexer;
 
 import com.jetbrains.jbmake.parser.MakefileSymbols;
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * @author daywalker
  * @since 10/06/15.
  */
-public class MakefileLexerTest extends TestCase {
+public class MakefileLexerTest {
+    @Test
     public void testSimpleRule() throws Exception {
         MakefileLexer makefileLexer = createMakefileLexer("src/test/resources/lexer/lexer-simple-rule.txt");
         MakefileSymbolFactory symbolFactory = new MakefileSymbolFactory();
@@ -22,6 +25,7 @@ public class MakefileLexerTest extends TestCase {
         assertEquals(symbolFactory.newSymbol(MakefileSymbols.LINE_TERMINATOR, 1, 11, 1, 11, "\n"), makefileLexer.next_token());
     }
 
+    @Test
     public void testRuleWithOneLineCommand() throws Exception {
         MakefileLexer makefileLexer = createMakefileLexer("src/test/resources/lexer/lexer-rule-with-command.txt");
         MakefileSymbolFactory symbolFactory = new MakefileSymbolFactory();

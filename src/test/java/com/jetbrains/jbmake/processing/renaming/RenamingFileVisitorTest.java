@@ -2,15 +2,18 @@ package com.jetbrains.jbmake.processing.renaming;
 
 import com.jetbrains.jbmake.parser.ast.*;
 import com.jetbrains.jbmake.processing.MakefileCreatingUtils;
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author daywalker
  * @since 15/06/15.
  */
-public class RenamingFileVisitorTest extends TestCase {
+public class RenamingFileVisitorTest {
+    @Test
     public void testOneRuleMakefile() throws Exception {
         final Makefile oneRuleMakefile = MakefileCreatingUtils.createOneRuleMakefile();
         final List<Rule> ruleList = getRulesAfterRename(oneRuleMakefile, "utils.c", "core.cpp");
@@ -18,6 +21,7 @@ public class RenamingFileVisitorTest extends TestCase {
         assertEquals(new Rule(new Target(new TargetId("core.o"), "core.cpp"), new Command("cc -c core.cpp")), ruleList.get(0));
     }
 
+    @Test
     public void testTwoRulesMakefile() throws Exception {
         final Makefile twoRulesMakefile = MakefileCreatingUtils.createTwoRulesMakefile();
         final List<Rule> ruleList = getRulesAfterRename(twoRulesMakefile, "utils.c", "generic.cpp");
@@ -26,6 +30,7 @@ public class RenamingFileVisitorTest extends TestCase {
         assertEquals(new Rule(new Target(new TargetId("generic.o"), "generic.cpp"), new Command("cc -c generic.cpp")), ruleList.get(1));
     }
 
+    @Test
     public void testTwoDependentRulesMakefile() throws Exception {
         final Makefile twoDependentRulesMakefile = MakefileCreatingUtils.createTwoDependentRulesMakefile();
         final List<Rule> ruleList = getRulesAfterRename(twoDependentRulesMakefile, "utils.c", "generic.cpp");
@@ -34,6 +39,7 @@ public class RenamingFileVisitorTest extends TestCase {
         assertEquals(new Rule(new Target(new TargetId("generic.o"), "generic.cpp"), new Command("cc -c generic.cpp")), ruleList.get(1));
     }
 
+    @Test
     public void testOriginalExample() throws Exception {
         final Makefile originalMakefile = MakefileCreatingUtils.createOriginalMakefile();
         final List<Rule> ruleList = getRulesAfterRename(originalMakefile, "main.cpp", "general.cxx");
