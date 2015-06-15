@@ -11,6 +11,32 @@ import java.util.List;
  * @since 15/06/15.
  */
 public class RenamingFileVisitorTest extends TestCase {
+    public void testOneRuleMakefile() throws Exception {
+        final Makefile oneRuleMakefile = MakefileCreatingUtils.createOneRuleMakefile();
+        oneRuleMakefile.accept(new RenamingFileVisitor("utils.c", "core.cpp"));
+        final List<Rule> ruleList = oneRuleMakefile.getRuleList();
+        assertEquals(1, ruleList.size());
+        assertEquals(new Rule(new Target(new TargetId("core.o"), "core.cpp"), new Command("cc -c core.cpp")), ruleList.get(0));
+    }
+
+    public void testTwoRulesMakefile() throws Exception {
+        final Makefile twoRulesMakefile = MakefileCreatingUtils.createTwoRulesMakefile();
+        twoRulesMakefile.accept(new RenamingFileVisitor("utils.c", "generic.cpp"));
+        final List<Rule> ruleList = twoRulesMakefile.getRuleList();
+        assertEquals(2, ruleList.size());
+        assertEquals(new Rule(new Target(new TargetId("core.o"), "core.c"), new Command("cc -c core.c")), ruleList.get(0));
+        assertEquals(new Rule(new Target(new TargetId("generic.o"), "generic.cpp"), new Command("cc -c generic.cpp")), ruleList.get(1));
+    }
+
+    public void testTwoDependentRulesMakefile() throws Exception {
+        final Makefile twoDependentRulesMakefile = MakefileCreatingUtils.createTwoDependentRulesMakefile();
+        twoDependentRulesMakefile.accept(new RenamingFileVisitor("utils.c", "generic.cpp"));
+        final List<Rule> ruleList = twoDependentRulesMakefile.getRuleList();
+        assertEquals(2, ruleList.size());
+        assertEquals(new Rule(new Target(new TargetId("all"), "generic.o")), ruleList.get(0));
+        assertEquals(new Rule(new Target(new TargetId("generic.o"), "generic.cpp"), new Command("cc -c generic.cpp")), ruleList.get(1));
+    }
+
     public void testOriginalExample() throws Exception {
         final Makefile originalMakefile = MakefileCreatingUtils.createOriginalMakefile();
         originalMakefile.accept(new RenamingFileVisitor("main.cpp", "general.cxx"));

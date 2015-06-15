@@ -1,0 +1,4 @@
+core.o: core.c
+	cc -c core.c
+utils.o: utils.c
+	cc -c utils.c
