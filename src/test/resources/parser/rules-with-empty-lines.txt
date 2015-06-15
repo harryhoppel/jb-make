@@ -1,0 +1,5 @@
+hello: main.o
+	g++ main.o -o hello
+
+test.o: test.cpp
+	g++ -c test.cpp

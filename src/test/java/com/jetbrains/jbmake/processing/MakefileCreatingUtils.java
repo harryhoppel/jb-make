@@ -30,4 +30,19 @@ public class MakefileCreatingUtils {
         return MakefileLoaderImpl.getInstance()
                 .loadMakefile("src/test/resources/examples/two-dependent-rules-makefile.txt");
     }
+
+    public static Makefile createMakefileWithEmptyLinesBetweenRules() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/parser/rules-with-empty-lines.txt");
+    }
+
+    public static Makefile createEmptyMakefile() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/examples/empty-file.txt");
+    }
+
+    public static Makefile createMakefileWithRecipeContinuation() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/examples/one-rule-recipe-continuation-makefile.txt");
+    }
 }

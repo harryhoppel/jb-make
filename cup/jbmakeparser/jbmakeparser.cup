@@ -9,6 +9,7 @@ terminal LINE_TERMINATOR;
 terminal RECIPE_PREFIX;
 terminal WHITESPACE;
 terminal SPACE;
+terminal LINE_CONTINUATION;
 terminal String OTHER;
 
 //------ Non terminals
@@ -50,6 +51,7 @@ rule                    ::= target:t LINE_TERMINATOR
                             {: RESULT = new Rule(t); :}
                         | target:t LINE_TERMINATOR command:c
                             {: RESULT = new Rule(t, c); :}
+                        | error LINE_TERMINATOR
                         ;
 
 target                  ::= target_id:ti COLON
