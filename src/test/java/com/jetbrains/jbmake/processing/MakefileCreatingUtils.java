@@ -15,4 +15,19 @@ public class MakefileCreatingUtils {
         return MakefileLoaderImpl.getInstance()
                 .loadMakefile("src/test/resources/parser/original-example.txt");
     }
+
+    public static Makefile createOneRuleMakefile() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/examples/one-rule-makefile.txt");
+    }
+
+    public static Makefile createTwoRulesMakefile() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/examples/two-rules-makefile.txt");
+    }
+
+    public static Makefile createTwoDependentRulesMakefile() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/examples/two-dependent-rules-makefile.txt");
+    }
 }

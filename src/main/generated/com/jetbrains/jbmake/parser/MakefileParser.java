@@ -265,7 +265,7 @@ class CUP$MakefileParser$actions {
           return CUP$MakefileParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // dependency_list ::= dependency SPACE dependency_list 
+          case 10: // dependency_list ::= dependencyName SPACE dependency_list 
             {
               List<Dependency> RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top-2)).left;
@@ -280,7 +280,7 @@ class CUP$MakefileParser$actions {
           return CUP$MakefileParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // dependency_list ::= dependency 
+          case 11: // dependency_list ::= dependencyName 
             {
               List<Dependency> RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()).left;
@@ -292,14 +292,14 @@ class CUP$MakefileParser$actions {
           return CUP$MakefileParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // dependency ::= OTHER 
+          case 12: // dependencyName ::= OTHER 
             {
               Dependency RESULT =null;
 		int dependency_valueleft = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()).left;
 		int dependency_valueright = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()).right;
 		String dependency_value = (String)((java_cup.runtime.Symbol) CUP$MakefileParser$stack.peek()).value;
 		 RESULT = new Dependency(dependency_value); 
-              CUP$MakefileParser$result = parser.getSymbolFactory().newSymbol("dependency",6, ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()), RESULT);
+              CUP$MakefileParser$result = parser.getSymbolFactory().newSymbol("dependencyName",6, ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()), RESULT);
             }
           return CUP$MakefileParser$result;
 

@@ -4,15 +4,18 @@ import com.jetbrains.jbmake.parser.ast.Makefile;
 import com.jetbrains.jbmake.processing.MakefileCreatingUtils;
 import com.jetbrains.jbmake.processing.SerializingVisitor;
 import com.jetbrains.jbmake.processing.renaming.RenamingFileVisitor;
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.io.StringWriter;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author daywalker
  * @since 15/06/15.
  */
-public class OriginalAcceptanceTest extends TestCase {
+public class OriginalAcceptanceTest {
+    @Test
     public void testOriginalCase() throws Exception {
         final Makefile originalMakefile = MakefileCreatingUtils.createOriginalMakefile();
         originalMakefile.accept(new RenamingFileVisitor("main.cpp", "general.cxx"));

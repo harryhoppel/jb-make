@@ -2,16 +2,19 @@ package com.jetbrains.jbmake.parser;
 
 import com.jetbrains.jbmake.core.MakefileLoaderImpl;
 import com.jetbrains.jbmake.parser.ast.*;
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author daywalker
  * @since 14/06/15.
  */
-public class MakefileParserTest extends TestCase {
+public class MakefileParserTest {
+    @Test
     public void testOriginalExample() throws Exception {
         Makefile nodeTree = MakefileLoaderImpl.getInstance()
                 .loadMakefile("src/test/resources/parser/original-example.txt");

@@ -26,7 +26,7 @@ public class MakefileLoaderImpl implements MakefileLoader {
 
     public Makefile loadMakefile(String pathToFile) throws FileNotFoundException, ParserException {
         BufferedInputStream makefileInputStream
-                = new BufferedInputStream(new FileInputStream("src/test/resources/parser/original-example.txt"));
+                = new BufferedInputStream(new FileInputStream(pathToFile));
         MakefileParser makefileParser
                 = new MakefileParser(new MakefileLexer(makefileInputStream), new MakefileSymbolFactory());
         try {
