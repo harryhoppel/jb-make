@@ -5,4 +5,7 @@ package com.jetbrains.jbmake.lexer.exceptions;
  * @since 12/06/15.
  */
 public class LexerException extends Exception {
+    public LexerException(String message) {
+        super(message);
+    }
 }

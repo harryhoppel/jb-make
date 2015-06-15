@@ -9,6 +9,7 @@ terminal LINE_TERMINATOR;
 terminal RECIPE_PREFIX;
 terminal WHITESPACE;
 terminal SPACE;
+terminal LINE_CONTINUATION;
 terminal String OTHER;
 
 //------ Non terminals

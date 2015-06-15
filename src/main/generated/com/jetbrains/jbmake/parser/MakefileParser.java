@@ -33,11 +33,12 @@ public class MakefileParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\017\000\002\002\003\000\002\002\004\000\002\003" +
+    "\000\020\000\002\002\003\000\002\002\004\000\002\003" +
     "\003\000\002\003\004\000\002\003\003\000\002\004\004" +
     "\000\002\004\005\000\002\004\004\000\002\005\004\000" +
     "\002\005\006\000\002\006\003\000\002\007\005\000\002" +
-    "\007\003\000\002\010\003\000\002\011\005" });
+    "\007\003\000\002\010\003\000\002\011\005\000\002\011" +
+    "\010" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -45,21 +46,23 @@ public class MakefileParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\030\000\010\003\007\005\011\011\004\001\002\000" +
+    "\000\034\000\010\003\007\005\011\012\004\001\002\000" +
     "\004\004\ufff7\001\002\000\004\002\001\001\002\000\004" +
-    "\002\032\001\002\000\004\005\031\001\002\000\004\004" +
-    "\022\001\002\000\004\002\ufffd\001\002\000\012\002\uffff" +
-    "\003\007\005\011\011\004\001\002\000\004\005\014\001" +
-    "\002\000\014\002\ufffc\003\ufffc\005\ufffc\006\015\011\ufffc" +
-    "\001\002\000\004\011\017\001\002\000\012\002\ufffb\003" +
-    "\ufffb\005\ufffb\011\ufffb\001\002\000\004\005\020\001\002" +
-    "\000\012\002\ufff3\003\ufff3\005\ufff3\011\ufff3\001\002\000" +
-    "\004\002\ufffe\001\002\000\006\005\ufff9\010\023\001\002" +
-    "\000\004\011\025\001\002\000\004\005\ufff8\001\002\000" +
-    "\006\005\ufff4\010\ufff4\001\002\000\006\005\ufff5\010\027" +
-    "\001\002\000\004\011\025\001\002\000\004\005\ufff6\001" +
-    "\002\000\012\002\ufffa\003\ufffa\005\ufffa\011\ufffa\001\002" +
-    "\000\004\002\000\001\002" });
+    "\002\036\001\002\000\004\005\035\001\002\000\004\004" +
+    "\026\001\002\000\004\002\ufffd\001\002\000\012\002\uffff" +
+    "\003\007\005\011\012\004\001\002\000\004\005\014\001" +
+    "\002\000\014\002\ufffc\003\ufffc\005\ufffc\006\015\012\ufffc" +
+    "\001\002\000\004\012\017\001\002\000\012\002\ufffb\003" +
+    "\ufffb\005\ufffb\012\ufffb\001\002\000\006\005\021\011\020" +
+    "\001\002\000\004\005\022\001\002\000\012\002\ufff3\003" +
+    "\ufff3\005\ufff3\012\ufff3\001\002\000\004\012\023\001\002" +
+    "\000\004\005\024\001\002\000\012\002\ufff2\003\ufff2\005" +
+    "\ufff2\012\ufff2\001\002\000\004\002\ufffe\001\002\000\006" +
+    "\005\ufff9\010\027\001\002\000\004\012\031\001\002\000" +
+    "\004\005\ufff8\001\002\000\006\005\ufff4\010\ufff4\001\002" +
+    "\000\006\005\ufff5\010\033\001\002\000\004\012\031\001" +
+    "\002\000\004\005\ufff6\001\002\000\012\002\ufffa\003\ufffa" +
+    "\005\ufffa\012\ufffa\001\002\000\004\002\000\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -67,16 +70,17 @@ public class MakefileParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\030\000\014\002\005\003\004\004\011\005\012\006" +
+    "\000\034\000\014\002\005\003\004\004\011\005\012\006" +
     "\007\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\012\003\020\004\011\005\012\006\007\001\001" +
+    "\001\000\012\003\024\004\011\005\012\006\007\001\001" +
     "\000\002\001\001\000\004\011\015\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\007\023\010" +
-    "\025\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\006\007\027\010\025\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001" });
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\006" +
+    "\007\027\010\031\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\006\007\033\010\031\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -323,6 +327,21 @@ class CUP$MakefileParser$actions {
 		String command_value = (String)((java_cup.runtime.Symbol) CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top-1)).value;
 		 RESULT = new Command(command_value); 
               CUP$MakefileParser$result = parser.getSymbolFactory().newSymbol("command",7, ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top-2)), ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()), RESULT);
+            }
+          return CUP$MakefileParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // command ::= RECIPE_PREFIX OTHER LINE_CONTINUATION LINE_TERMINATOR OTHER LINE_TERMINATOR 
+            {
+              Command RESULT =null;
+		int command_valueleft = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top-4)).left;
+		int command_valueright = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top-4)).right;
+		String command_value = (String)((java_cup.runtime.Symbol) CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top-4)).value;
+		int cleft = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top - 1)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top - 1)).right;
+		String c = (String)((java_cup.runtime.Symbol) CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top - 1)).value;
+		 RESULT = new Command(command_value + c); 
+              CUP$MakefileParser$result = parser.getSymbolFactory().newSymbol("command",7, ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.elementAt(CUP$MakefileParser$top-5)), ((java_cup.runtime.Symbol)CUP$MakefileParser$stack.peek()), RESULT);
             }
           return CUP$MakefileParser$result;
 

@@ -1,0 +1,5 @@
+core.o: core.c
+	cc -c core.c
+malformed
+utils.o: utils.c
+	cc -c utils.c

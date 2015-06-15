@@ -8,14 +8,15 @@ package com.jetbrains.jbmake.parser;
 /** CUP generated interface containing symbol constants. */
 public interface MakefileSymbols {
   /* terminals */
-  public static final int OTHER = 7;
   public static final int RECIPE_PREFIX = 4;
-  public static final int error = 1;
-  public static final int WHITESPACE = 5;
   public static final int COLON = 2;
-  public static final int SPACE = 6;
-  public static final int LINE_TERMINATOR = 3;
+  public static final int WHITESPACE = 5;
+  public static final int OTHER = 8;
   public static final int EOF = 0;
+  public static final int LINE_CONTINUATION = 7;
+  public static final int LINE_TERMINATOR = 3;
+  public static final int error = 1;
+  public static final int SPACE = 6;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -24,6 +25,7 @@ public interface MakefileSymbols {
   "RECIPE_PREFIX",
   "WHITESPACE",
   "SPACE",
+  "LINE_CONTINUATION",
   "OTHER"
   };
 }
