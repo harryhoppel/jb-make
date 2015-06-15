@@ -88,6 +88,6 @@ RecipePrefix = \t
 }
 
 <RECIPE_COMMAND> {
-    {LineTerminator}        { yybegin(YYINITIAL); return symbol(LINE_TERMINATOR, yytext()); }
+    {LineTerminator}+       { yybegin(YYINITIAL); return symbol(LINE_TERMINATOR, yytext()); }
     [^\r\n]+                { return symbol(OTHER, yytext()); }
 }
