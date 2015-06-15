@@ -50,6 +50,7 @@ rule                    ::= target:t LINE_TERMINATOR
                             {: RESULT = new Rule(t); :}
                         | target:t LINE_TERMINATOR command:c
                             {: RESULT = new Rule(t, c); :}
+                        | error LINE_TERMINATOR
                         ;
 
 target                  ::= target_id:ti COLON

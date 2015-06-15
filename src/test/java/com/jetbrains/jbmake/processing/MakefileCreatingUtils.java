@@ -30,4 +30,9 @@ public class MakefileCreatingUtils {
         return MakefileLoaderImpl.getInstance()
                 .loadMakefile("src/test/resources/examples/two-dependent-rules-makefile.txt");
     }
+
+    public static Makefile createMakefileWithEmptyLinesBetweenRules() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/parser/rules-with-empty-lines.txt");
+    }
 }
