@@ -13,16 +13,14 @@ import java.util.List;
 public class RenamingFileVisitorTest extends TestCase {
     public void testOneRuleMakefile() throws Exception {
         final Makefile oneRuleMakefile = MakefileCreatingUtils.createOneRuleMakefile();
-        oneRuleMakefile.accept(new RenamingFileVisitor("utils.c", "core.cpp"));
-        final List<Rule> ruleList = oneRuleMakefile.getRuleList();
+        final List<Rule> ruleList = getRulesAfterRename(oneRuleMakefile, "utils.c", "core.cpp");
         assertEquals(1, ruleList.size());
         assertEquals(new Rule(new Target(new TargetId("core.o"), "core.cpp"), new Command("cc -c core.cpp")), ruleList.get(0));
     }
 
     public void testTwoRulesMakefile() throws Exception {
         final Makefile twoRulesMakefile = MakefileCreatingUtils.createTwoRulesMakefile();
-        twoRulesMakefile.accept(new RenamingFileVisitor("utils.c", "generic.cpp"));
-        final List<Rule> ruleList = twoRulesMakefile.getRuleList();
+        final List<Rule> ruleList = getRulesAfterRename(twoRulesMakefile, "utils.c", "generic.cpp");
         assertEquals(2, ruleList.size());
         assertEquals(new Rule(new Target(new TargetId("core.o"), "core.c"), new Command("cc -c core.c")), ruleList.get(0));
         assertEquals(new Rule(new Target(new TargetId("generic.o"), "generic.cpp"), new Command("cc -c generic.cpp")), ruleList.get(1));
@@ -30,8 +28,7 @@ public class RenamingFileVisitorTest extends TestCase {
 
     public void testTwoDependentRulesMakefile() throws Exception {
         final Makefile twoDependentRulesMakefile = MakefileCreatingUtils.createTwoDependentRulesMakefile();
-        twoDependentRulesMakefile.accept(new RenamingFileVisitor("utils.c", "generic.cpp"));
-        final List<Rule> ruleList = twoDependentRulesMakefile.getRuleList();
+        final List<Rule> ruleList = getRulesAfterRename(twoDependentRulesMakefile, "utils.c", "generic.cpp");
         assertEquals(2, ruleList.size());
         assertEquals(new Rule(new Target(new TargetId("all"), "generic.o")), ruleList.get(0));
         assertEquals(new Rule(new Target(new TargetId("generic.o"), "generic.cpp"), new Command("cc -c generic.cpp")), ruleList.get(1));
@@ -39,9 +36,7 @@ public class RenamingFileVisitorTest extends TestCase {
 
     public void testOriginalExample() throws Exception {
         final Makefile originalMakefile = MakefileCreatingUtils.createOriginalMakefile();
-        originalMakefile.accept(new RenamingFileVisitor("main.cpp", "general.cxx"));
-
-        final List<Rule> ruleList = originalMakefile.getRuleList();
+        final List<Rule> ruleList = getRulesAfterRename(originalMakefile, "main.cpp", "general.cxx");
         assertEquals(4, ruleList.size());
 
         assertEquals(new Rule(new Target(new TargetId("all"), "hello")), ruleList.get(0));
@@ -54,5 +49,10 @@ public class RenamingFileVisitorTest extends TestCase {
 
         assertEquals(new Rule(new Target(new TargetId("clean")), new Command("rm *o hello")), ruleList.get(3));
 
+    }
+
+    private List<Rule> getRulesAfterRename(Makefile oneRuleMakefile, String oldFileName, String newFileName) {
+        oneRuleMakefile.accept(new RenamingFileVisitor(oldFileName, newFileName));
+        return oneRuleMakefile.getRuleList();
     }
 }
