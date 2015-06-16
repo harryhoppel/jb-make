@@ -45,6 +45,15 @@ public class MakefileParserTest {
     }
 
     @Test
+    public void testMalformedTarget() throws Exception {
+        Makefile nodeTree = MakefileCreatingUtils.createMalformedRuleMakefile();
+        final List<Rule> ruleList = nodeTree.getRuleList();
+        assertEquals(2, ruleList.size());
+        assertEquals(new Rule(new Target(new TargetId("core.o"), "core.c"), new Command("cc -c core.c")), ruleList.get(0));
+        assertEquals(new Rule(new Target(new TargetId("utils.o"), "utils.c"), new Command("cc -c utils.c")), ruleList.get(1));
+    }
+
+    @Test
     public void testOriginalExample() throws Exception {
         Makefile nodeTree = MakefileCreatingUtils.createOriginalMakefile();
         final List<Rule> ruleList = nodeTree.getRuleList();

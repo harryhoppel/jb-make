@@ -45,4 +45,9 @@ public class MakefileCreatingUtils {
         return MakefileLoaderImpl.getInstance()
                 .loadMakefile("src/test/resources/examples/one-rule-recipe-continuation-makefile.txt");
     }
+
+    public static Makefile createMalformedRuleMakefile() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/examples/malformed-rule.txt");
+    }
 }

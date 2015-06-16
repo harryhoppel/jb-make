@@ -35,8 +35,7 @@ makefile                ::= rule_list:ll
 rule_list               ::= rule:r
                             {: RESULT = new LinkedList<Rule>(); RESULT.add(0, r); :}
                         | rule:r rule_list:rl
-                            {: rl.add(0, r); RESULT = rl; :}
-                        | LINE_TERMINATOR
+                            {: if (r != null) rl.add(0, r); RESULT = rl; :}
                         ;
 
 //
