@@ -15,11 +15,18 @@ public class FileUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileUtils.class);
 
     public static void writeWoException(Writer writer, String s) {
-        // todo replace with closeable or something from some generic library like Guava – when we'll need one
         try {
             writer.write(s);
         } catch (IOException e) {
             LOGGER.warn("Can't write string: " + s, e);
+        }
+    }
+
+    public static void writeWoException(Writer writer, char c) {
+        try {
+            writer.write(c);
+        } catch (IOException e) {
+            LOGGER.warn("Can't write string: " + c, e);
         }
     }
 

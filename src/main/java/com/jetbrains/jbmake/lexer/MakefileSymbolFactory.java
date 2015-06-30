@@ -1,7 +1,7 @@
 package com.jetbrains.jbmake.lexer;
 
-import com.jetbrains.jbmake.parser.MakefileSymbols;
 import java_cup.runtime.ComplexSymbolFactory;
+import java_cup.runtime.MakefileSymbols;
 import java_cup.runtime.Symbol;
 
 /**
