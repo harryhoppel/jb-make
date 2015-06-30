@@ -2,8 +2,8 @@ package com.jetbrains.jbmake;
 
 import com.jetbrains.jbmake.parser.ast.Makefile;
 import com.jetbrains.jbmake.processing.MakefileCreatingUtils;
-import com.jetbrains.jbmake.processing.SerializingVisitor;
 import com.jetbrains.jbmake.processing.renaming.RenamingFileVisitor;
+import com.jetbrains.jbmake.processing.serialization.SerializingVisitor;
 import org.junit.Test;
 
 import java.io.StringWriter;
@@ -21,7 +21,7 @@ public class OriginalAcceptanceTest {
         originalMakefile.accept(new RenamingFileVisitor("main.cpp", "general.cxx"));
 
         final StringWriter writer = new StringWriter();
-        originalMakefile.accept(new SerializingVisitor(writer));
+        originalMakefile.accept(new SerializingVisitor(writer, "\n"));
 
         assertEquals("all: hello\n" +
                 "hello: general.o\n" +

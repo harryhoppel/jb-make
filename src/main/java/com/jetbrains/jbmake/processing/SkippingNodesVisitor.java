@@ -14,6 +14,7 @@ public interface SkippingNodesVisitor {
     void postVisit(Rule rule);
 
     boolean preVisit(Target target);
+    void postVisitTargetId(Target target);
     void postVisit(Target target);
 
     void visit(TargetId targetId);

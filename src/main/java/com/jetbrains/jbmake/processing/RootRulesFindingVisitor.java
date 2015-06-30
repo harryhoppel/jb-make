@@ -15,8 +15,8 @@ import java.util.Set;
  * @since 14/06/15.
  */
 public class RootRulesFindingVisitor extends DefaultMakefileVisitor {
-    private final Set<String> dependencyNames = new HashSet<String>();
-    private final Map<String, Rule> targetIdToRule = new HashMap<String, Rule>();
+    private final Set<String> dependencyNames = new HashSet<>();
+    private final Map<String, Rule> targetIdToRule = new HashMap<>();
 
     private Set<Rule> rootRules;
 
@@ -39,10 +39,8 @@ public class RootRulesFindingVisitor extends DefaultMakefileVisitor {
 
     @Override
     public void postVisit(Makefile makefile) {
-        for (String dependencyName : dependencyNames) {
-            targetIdToRule.remove(dependencyName);
-        }
-        rootRules = new HashSet<Rule>();
+        dependencyNames.forEach(targetIdToRule::remove);
+        rootRules = new HashSet<>();
         rootRules.addAll(targetIdToRule.values());
     }
 

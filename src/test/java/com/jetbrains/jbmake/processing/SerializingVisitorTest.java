@@ -1,6 +1,7 @@
 package com.jetbrains.jbmake.processing;
 
 import com.jetbrains.jbmake.parser.ast.Makefile;
+import com.jetbrains.jbmake.processing.serialization.SerializingVisitor;
 import org.junit.Test;
 
 import java.io.StringWriter;
@@ -37,6 +38,14 @@ public class SerializingVisitorTest {
     }
 
     @Test
+    public void testWindowsSerialization() throws Exception {
+        final Makefile oneRuleMakefile = MakefileCreatingUtils.createTwoDependentRulesMakefile();
+        testSerialization("all: utils.o\r\n" +
+                "utils.o: utils.c\r\n" +
+                "\tcc -c utils.c\r\n", oneRuleMakefile, "\r\n");
+    }
+
+    @Test
     public void testOriginalExample() throws Exception {
         final Makefile originalMakefile = MakefileCreatingUtils.createOriginalMakefile();
         testSerialization(
@@ -45,13 +54,17 @@ public class SerializingVisitorTest {
                         "\tg++ main.o -o hello\n" +
                         "main.o: main.cpp\n" +
                         "\tg++ -c main.cpp\n" +
-                "clean:\n" +
-                "\trm *o hello\n", originalMakefile);
+                        "clean:\n" +
+                        "\trm *o hello\n", originalMakefile);
     }
 
     private void testSerialization(String expectedOutput, Makefile oneRuleMakefile) {
+        testSerialization(expectedOutput, oneRuleMakefile, "\n");
+    }
+
+    private void testSerialization(String expectedOutput, Makefile oneRuleMakefile, String lineSeparator) {
         final StringWriter writer = new StringWriter();
-        final SerializingVisitor serializingVisitor = new SerializingVisitor(writer);
+        final SerializingVisitor serializingVisitor = new SerializingVisitor(writer, lineSeparator);
         oneRuleMakefile.accept(serializingVisitor);
         assertEquals(expectedOutput, writer.toString());
     }

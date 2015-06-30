@@ -1,0 +1,14 @@
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+
+<preferences>
+    <root type="user">
+        <map/>
+        <node name="makefile-editor">
+            <map>
+                <entry key="window-width" value="800"/>
+                <entry key="window-height" value="600"/>
+                <entry key="default-makefile" value="src/main/resources/default/Makefile"/>
+            </map>
+        </node>
+    </root>
+</preferences>

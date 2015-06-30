@@ -11,4 +11,6 @@ import java.io.FileNotFoundException;
  */
 public interface MakefileLoader {
     Makefile loadMakefile(String pathToFile) throws FileNotFoundException, ParserException;
+
+    Makefile parseMakefile(String fileContent) throws FileNotFoundException, ParserException;
 }

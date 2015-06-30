@@ -6,10 +6,11 @@ import com.jetbrains.jbmake.processing.SkippingNodesVisitor;
  * @author daywalker
  * @since 13/06/15.
  */
-public class Command {
+public class Command extends Locatable {
     private String commandLine;
 
-    public Command(String commandLine) {
+    public Command(Location locationLeft, String commandLine, Location locationRight) {
+        super(locationLeft, locationRight);
         this.commandLine = commandLine;
     }
 
@@ -32,6 +33,12 @@ public class Command {
 
         Command command1 = (Command) o;
 
+        if (locationLeft != null ? !locationLeft.equals(command1.locationLeft) : command1.locationLeft != null)
+            return false;
+        //noinspection SimplifiableIfStatement
+        if (locationRight != null ? !locationRight.equals(command1.locationRight) : command1.locationRight != null)
+            return false;
+
         return !(commandLine != null ? !commandLine.equals(command1.commandLine) : command1.commandLine != null);
     }
 
@@ -44,6 +51,8 @@ public class Command {
     public String toString() {
         return "Command{" +
                 "commandLine='" + commandLine + '\'' +
+                ", locationLeft='" + locationLeft + '\'' +
+                ", locationRight='" + locationRight + '\'' +
                 '}';
     }
 }

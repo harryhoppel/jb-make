@@ -6,7 +6,6 @@ import java_cup.runtime.*;
 import jflex.sym;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 import com.jetbrains.jbmake.lexer.exceptions.*;
-import com.jetbrains.jbmake.parser.*;
 
 %%
 

@@ -8,7 +8,6 @@ import com.jetbrains.jbmake.parser.ast.TargetId;
  * @author daywalker
  * @since 14/06/15.
  *
- * todo not only this 'replace()' is ugly, right now it won't always work. See tests for more info
  */
 public class RenamingUtils {
     public static String getCommandWithRenamedFile(Command command,

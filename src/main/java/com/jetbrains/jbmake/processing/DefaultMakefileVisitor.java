@@ -27,6 +27,8 @@ public class DefaultMakefileVisitor implements SkippingNodesVisitor {
         return true;
     }
 
+    public void postVisitTargetId(Target target) {}
+
     public void postVisit(Target target) {
 
     }
