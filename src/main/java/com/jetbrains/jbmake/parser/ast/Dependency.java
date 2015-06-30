@@ -6,10 +6,15 @@ import com.jetbrains.jbmake.processing.SkippingNodesVisitor;
  * @author daywalker
  * @since 13/06/15.
  */
-public class Dependency implements Visitable {
+public class Dependency extends Locatable implements Visitable {
     private String dependencyName;
 
-    public Dependency(String dependencyName) {
+    public static Dependency dep(Location locationLeft, String dependencyName, Location locationRight) {
+        return new Dependency(locationLeft, dependencyName, locationRight);
+    }
+
+    public Dependency(Location locationLeft, String dependencyName, Location locationRight) {
+        super(locationLeft, locationRight);
         this.dependencyName = dependencyName;
     }
 
@@ -32,6 +37,11 @@ public class Dependency implements Visitable {
 
         Dependency that = (Dependency) o;
 
+        if (locationLeft != null ? !locationLeft.equals(that.locationLeft) : that.locationLeft != null)
+            return false;
+        //noinspection SimplifiableIfStatement
+        if (locationRight != null ? !locationRight.equals(that.locationRight) : that.locationRight != null)
+            return false;
         return !(dependencyName != null ? !dependencyName.equals(that.dependencyName) : that.dependencyName != null);
 
     }
@@ -45,6 +55,8 @@ public class Dependency implements Visitable {
     public String toString() {
         return "Dependency{" +
                 "dependencyName='" + dependencyName + '\'' +
+                ", locationLeft='" + locationLeft + '\'' +
+                ", locationRight='" + locationRight + '\'' +
                 '}';
     }
 }

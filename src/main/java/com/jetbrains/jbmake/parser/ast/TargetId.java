@@ -4,10 +4,11 @@ package com.jetbrains.jbmake.parser.ast;
  * @author daywalker
  * @since 13/06/15.
  */
-public class TargetId {
+public class TargetId extends Locatable {
     private String targetName;
 
-    public TargetId(String targetName) {
+    public TargetId(Location locationLeft, String targetName, Location locationRight) {
+        super(locationLeft, locationRight);
         this.targetName = targetName;
     }
 
@@ -26,19 +27,28 @@ public class TargetId {
 
         TargetId targetId = (TargetId) o;
 
-        return !(targetName != null ? !targetName.equals(targetId.targetName) : targetId.targetName != null);
+        if (locationLeft != null ? !locationLeft.equals(targetId.locationLeft) : targetId.locationLeft != null)
+            return false;
+        //noinspection SimplifiableIfStatement
+        if (targetName != null ? !targetName.equals(targetId.targetName) : targetId.targetName != null) return false;
+        return !(locationRight != null ? !locationRight.equals(targetId.locationRight) : targetId.locationRight != null);
 
     }
 
     @Override
     public int hashCode() {
-        return targetName != null ? targetName.hashCode() : 0;
+        int result = locationLeft != null ? locationLeft.hashCode() : 0;
+        result = 31 * result + (targetName != null ? targetName.hashCode() : 0);
+        result = 31 * result + (locationRight != null ? locationRight.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "TargetId{" +
                 "targetName='" + targetName + '\'' +
+                ", locationLeft='" + locationLeft + '\'' +
+                ", locationRight='" + locationRight + '\'' +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
 package com.jetbrains.jbmake.lexer;
 
-import com.jetbrains.jbmake.parser.MakefileSymbols;
+import java_cup.runtime.MakefileSymbols;
 import org.junit.Test;
 
 import java.io.BufferedInputStream;

@@ -1,6 +1,6 @@
 package com.jetbrains.jbmake.processing;
 
-import com.jetbrains.jbmake.core.MakefileLoaderImpl;
+import com.jetbrains.jbmake.core.editor.MakefileLoaderImpl;
 import com.jetbrains.jbmake.parser.ast.Makefile;
 import com.jetbrains.jbmake.parser.exceptions.ParserException;
 
@@ -49,5 +49,10 @@ public class MakefileCreatingUtils {
     public static Makefile createMalformedRuleMakefile() throws FileNotFoundException, ParserException {
         return MakefileLoaderImpl.getInstance()
                 .loadMakefile("src/test/resources/examples/malformed-rule.txt");
+    }
+
+    public static Makefile createMakefileFromManual() throws FileNotFoundException, ParserException {
+        return MakefileLoaderImpl.getInstance()
+                .loadMakefile("src/test/resources/parser/manual-example.txt");
     }
 }
